@@ -1,0 +1,130 @@
+\ProvidesPackage{aneotheme}
+\usetheme{default}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\RequirePackage{graphicx}
+
+\AtBeginDocument{
+  \institute{\textbf{ANEO}}
+}
+
+% Define primary colors
+\definecolor{aneoorange}{RGB}{254, 81, 0}
+\definecolor{aneoblue}{RGB}{0, 15, 159}
+\definecolor{aneoblack}{RGB}{20, 20, 20}
+
+% Define secondary colors
+\definecolor{aneoyellow}{RGB}{255, 182, 0}
+\definecolor{aneoturquoise}{RGB}{0, 196, 176}
+\definecolor{aneogray}{RGB}{238, 239, 240}
+
+% Color theme in structure
+\usecolortheme[named=aneoblue]{structure}
+
+% Customize inner elements
+\setbeamercolor{title}{fg=aneoblack,bg=aneoorange}
+
+% Color of items/numbers in lists
+\setbeamercolor{item}{fg=aneoorange}
+
+% Color of the outline section
+\setbeamercolor{section in toc}{fg=aneoblue}
+
+% All slides have custom gray as bg
+\setbeamercolor{background canvas}{bg=aneogray}
+
+% Block colors
+\setbeamercolor{block title}{bg=aneoturquoise,fg=aneoblack}
+\setbeamercolor{block body}{bg=aneoturquoise!10,fg=aneoblack}
+
+\setbeamercolor{block title alerted}{bg=aneoorange,fg=aneoblack}
+\setbeamercolor{block body alerted}{bg=aneoorange!10,fg=aneoblack}
+
+\setbeamercolor{block title example}{bg=aneoblue,fg=white}
+\setbeamercolor{block body example}{bg=aneoblue!10,fg=aneoblack}
+
+% Navigation symbols off
+\setbeamertemplate{navigation symbols}{}
+
+
+% Define the title page emulating ppt aneo template
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[overlay, remember picture]
+    % split page in two colors
+    \fill[aneoblue] (current page.north west) rectangle ([xshift=0.5\paperwidth]current page.south west);
+    \fill[aneogray] ([xshift=0.5\paperwidth]current page.north west) rectangle (current page.south east);
+    % Aneo logo enclosed in a circle
+    \begin{scope}
+      \fill[aneogray] ([yshift=0.2\paperheight]current page.center) circle (1.5cm);
+      \node at ([yshift=0.2\paperheight]current page.center){%
+        \includegraphics[width=2cm,height=2cm,keepaspectratio]{LogoA_couleur.png}
+        };
+    \end{scope}
+    % Title info
+    \node[anchor=west, align=left] at ([yshift=-0.1\paperheight]current page.center){%
+      \begin{minipage}{0.4\paperwidth}
+        \usebeamerfont{title}\inserttitle\\[1ex]
+        \usebeamerfont{institute}\footnotesize\insertinstitute \\[1ex]
+        \usebeamerfont{author}\large\insertauthor\\[1ex]
+        \usebeamerfont{date}\footnotesize\insertdate
+      \end{minipage}
+     };%
+  \end{tikzpicture}
+}
+
+\renewcommand{\titlepage}{
+  \begin{frame}[plain,noframenumbering]
+    \usebeamertemplate{title page}
+  \end{frame}
+}
+
+% Custom footline with [short] title, [short] author and slide number
+\setbeamertemplate{footline}{}
+\setbeamercolor{author in head/foot}{bg=aneoblue, fg=aneogray}
+\setbeamercolor{title in head/foot}{bg=aneoblue, fg=aneogray}
+\setbeamertemplate{footline}{%
+  \ifnum\value{framenumber}>0%
+    \leavevmode%
+    \hbox{%
+      % Author
+      \begin{beamercolorbox}[wd=0.4\paperwidth,ht=2.5ex,dp=1ex,left]{author in head/foot}%
+        \usebeamerfont{author in head/foot}\hspace{1em}\insertshortauthor
+      \end{beamercolorbox}%
+      % Title
+      \begin{beamercolorbox}[wd=0.4\paperwidth,ht=2.5ex,dp=1ex,left]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+      % Slide number
+      \begin{beamercolorbox}[wd=0.2\paperwidth,ht=2.5ex,dp=1ex,right]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertframenumber{}\hspace{1em}
+      \end{beamercolorbox}%
+  }%
+  \fi
+  \vskip0pt%
+}
+
+% Custom headline with current slide title left and aneo logo to the right
+\setbeamertemplate{headline}{}
+\setbeamercolor{frametitle}{fg=white,bg=aneoblue}
+\newcommand{\safeinsertframetitle}{%
+  \@ifundefined{insertframetitle}{}{%
+    \insertframetitle%
+  }%
+}
+\setbeamertemplate{headline}{%
+  \ifnum\value{framenumber}>0
+    \leavevmode
+    \hbox{%
+      % Left box: slide title, empty if not defined
+      \begin{beamercolorbox}[wd=0.8\paperwidth,ht=3em,dp=2ex,leftskip=1em]{frametitle}%
+        \usebeamerfont{frametitle}\safeinsertframetitle
+      \end{beamercolorbox}%
+      % Right box: aneo logo
+      \begin{beamercolorbox}[wd=0.2\paperwidth,ht=3em,dp=2ex,rightskip=1em]{frametitle}%
+        \hfill\includegraphics[height=2.5em]{LogoA_couleur.png}%
+      \end{beamercolorbox}%
+    }%
+  \fi
+  \vskip0pt
+}
+\setbeamertemplate{frametitle}{}

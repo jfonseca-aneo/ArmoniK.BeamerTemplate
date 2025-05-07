@@ -1,0 +1,57 @@
+\documentclass{beamer}
+\usepackage{aneotheme}
+\usepackage{lipsum}
+
+\title{Awesome Title}
+\author{Awesome Author}
+\date{\today}
+
+\begin{document}
+
+\titlepage
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}
+  \lipsum[1][1-8]
+\end{frame}
+
+\begin{frame}
+  \lipsum[2][1-8]
+\end{frame}
+
+\section{Items}
+\begin{frame}{Itemized lists}
+  \begin{itemize}
+    \item \lipsum[2][1]
+    \item \lipsum[4][1]
+    \item \lipsum[6][1]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Enumerated lists}
+  \begin{enumerate}
+    \item \lipsum[3][2]
+    \item \lipsum[5][2]
+    \item \lipsum[7][2]
+ \end{enumerate}
+\end{frame}
+
+\section{Blocks}
+\begin{frame}{Highlights}
+  \begin{block}{Key Point}
+    This is a key point.
+  \end{block}
+  \begin{alertblock}{Alert!}
+    This is an alert block
+  \end{alertblock}
+  \begin{exampleblock}{Example}
+    This is an example block.
+  \end{exampleblock}
+\end{frame}
+
+\end{document}
