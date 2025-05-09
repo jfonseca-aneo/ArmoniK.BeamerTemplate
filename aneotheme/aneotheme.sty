@@ -4,11 +4,22 @@
 \usetikzlibrary{calc}
 \RequirePackage{graphicx}
 
-\def\basepath{.}
-\graphicspath{{\basepath/}}
+\usepackage{fontspec}
+
+% Set main font as Lexend Deca as in the charte
+% graphique from 2024
+\setsansfont{Lexend Deca Light}
+
+% Set titles and subtitles in Poppins Semibold as
+% in the charte graphique from 2024
+\newfontface\poppinssemibold{Poppins SemiBold}
+\setbeamerfont{frametitle}{family=\poppinssemibold}
+\setbeamerfont{title}{family=\poppinssemibold}
+\setbeamerfont{section title}{family=\poppinssemibold}
+\setbeamerfont{subtitle}{family=\poppinssemibold}
 
 \AtBeginDocument{
-  \institute{\textbf{ANEO}}
+  \institute{{\poppinssemibold ANEO}}
 }
 
 % Define primary colors
@@ -37,12 +48,15 @@
 \setbeamercolor{background canvas}{bg=aneogray}
 
 % Block colors
+\setbeamerfont{block title}{family=\poppinssemibold}
 \setbeamercolor{block title}{bg=aneoturquoise,fg=aneoblack}
 \setbeamercolor{block body}{bg=aneoturquoise!10,fg=aneoblack}
 
+\setbeamerfont{block title alerted}{family=\poppinssemibold}
 \setbeamercolor{block title alerted}{bg=aneoorange,fg=aneoblack}
 \setbeamercolor{block body alerted}{bg=aneoorange!10,fg=aneoblack}
 
+\setbeamerfont{block title example}{family=\poppinssemibold}
 \setbeamercolor{block title example}{bg=aneoblue,fg=white}
 \setbeamercolor{block body example}{bg=aneoblue!10,fg=aneoblack}
 
@@ -74,10 +88,30 @@
      };%
   \end{tikzpicture}
 }
-
 \renewcommand{\titlepage}{
   \begin{frame}[plain,noframenumbering]
     \usebeamertemplate{title page}
+  \end{frame}
+}
+
+% Define the closing page emulating ppt aneo template
+\newcommand{\closingpage}{
+  \begin{frame}[plain, noframenumbering]
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[aneoorange] (current page.south west) rectangle (current page.north east);
+    \node[anchor=south east] at ([yshift=-0.25\paperheight, xshift=0.2\paperwidth]current page.center){%
+      \includegraphics[width=3cm,height=3cm,keepaspectratio]{LOGO_BLANC.png}
+    };
+    \node[anchor=north,align=left] at ([yshift=-0.25\paperheight, xshift=0.2\paperwidth]current page.center){%
+      \begin{minipage}{0.35\paperwidth}
+        \footnotesize
+        \color{aneogray}
+        122 avenue du general Leclerc \\[1ex]
+        91200 Boulogne-Billancourt \\[1ex]
+        www.aneo.eu
+      \end{minipage}
+    };
+  \end{tikzpicture}%
   \end{frame}
 }
 
@@ -88,17 +122,20 @@
 \setbeamertemplate{footline}{%
   \ifnum\value{framenumber}>0%
     \leavevmode%
-    \hbox{%
+    \hbox to \paperwidth{%
+      \hskip-0.05em%
       % Author
-      \begin{beamercolorbox}[wd=0.4\paperwidth,ht=2.5ex,dp=1ex,left]{author in head/foot}%
+      \begin{beamercolorbox}[wd=0.45\paperwidth,ht=2.5ex,dp=1ex,left]{author in head/foot}%
         \usebeamerfont{author in head/foot}\hspace{1em}\insertshortauthor
       \end{beamercolorbox}%
+      \hskip-0.05em%
       % Title
       \begin{beamercolorbox}[wd=0.4\paperwidth,ht=2.5ex,dp=1ex,left]{title in head/foot}%
         \usebeamerfont{title in head/foot}\insertshorttitle
       \end{beamercolorbox}%
+      \hskip-0.05em%
       % Slide number
-      \begin{beamercolorbox}[wd=0.2\paperwidth,ht=2.5ex,dp=1ex,right]{title in head/foot}%
+      \begin{beamercolorbox}[wd=0.155\paperwidth,ht=2.5ex,dp=1ex,right]{title in head/foot}%
         \usebeamerfont{title in head/foot}\insertframenumber{}\hspace{1em}
       \end{beamercolorbox}%
   }%
@@ -119,12 +156,13 @@
     \leavevmode
     \hbox{%
       % Left box: slide title, empty if not defined
-      \begin{beamercolorbox}[wd=0.8\paperwidth,ht=3em,dp=2ex,leftskip=1em]{frametitle}%
+      \begin{beamercolorbox}[wd=0.85\paperwidth,ht=3em,dp=2ex,leftskip=1em]{frametitle}%
         \usebeamerfont{frametitle}\safeinsertframetitle
       \end{beamercolorbox}%
+      \hskip-0.05em%
       % Right box: aneo logo
-      \begin{beamercolorbox}[wd=0.2\paperwidth,ht=3em,dp=2ex,rightskip=1em]{frametitle}%
-        \hfill\includegraphics[height=2.5em]{LogoA_couleur.png}%
+      \begin{beamercolorbox}[wd=0.155\paperwidth,ht=3em,dp=2ex,rightskip=1em]{frametitle}%
+        \hfill\includegraphics[height=2.5em]{LogoA_blanc.png}%
       \end{beamercolorbox}%
     }%
   \fi
