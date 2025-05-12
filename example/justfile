@@ -1,4 +1,6 @@
 THEME_DIR := "$(realpath ../aneotheme)"
+FONTS_DIR := THEME_DIR + "/fonts"
+
 PDFLATEX_FLAGS := "-shell-escape -interaction=nonstopmode -synctex=1"
 
 default:
@@ -6,13 +8,14 @@ default:
 
 compile tex_file:
     #!/bin/bash
-    export TEXINPUTS="{{THEME_DIR}}:$TEXINPUTS"
+    export OSFONTDIR="{{FONTS_DIR}}//:$OSFONTDIR"
+    export TEXINPUTS="{{THEME_DIR}}//:$TEXINPUTS"
     if which latexmk > /dev/null 2>&1; then
         echo "Using latexmk to compile the document."
-        latexmk -pdf $PDFLATEX_FLAGS "$(realpath {{tex_file}})"
+        latexmk -lualatex $PDFLATEX_FLAGS "$(realpath {{tex_file}})"
     else
-        echo "Using pdflatex to compile the document."
-        pdflatex $PDFLATEX_FLAGS "$(realpath {{tex_file}})"
+        echo "Using lualatex to compile the document."
+        lualatex $PDFLATEX_FLAGS  "$(realpath {{tex_file}})"
     fi
 
 clean:

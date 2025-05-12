@@ -1,20 +1,25 @@
 # LaTeX Beamer template for ArmoniK presentations
 
-This repository contains a beamer template with a custom ANEO inspired theme and a build systempowered by [`just`](https://github.com/casey/just). It supports automatic compilation using `latexmk` if installed, or falls back to `pdflatex` otherwise.
+This repository contains a beamer template with a custom ANEO inspired theme and a build systempowered by [`just`](https://github.com/casey/just). It supports automatic compilation using `latexmk` if installed, or falls back to `lualatex` otherwise.
 
 ## Requirements
 
 - `just` command runner
 - LaTeX distribution (e.g.; TeX Live)
+- lualatex to be able to use the Poppins and Lexend Deca fonts
 - Optional: `latexmk` for smarter compilation
 
 ## Usage
 
-The example directory provides a sample presentation using the custom theme. The directoy contains two files: the  `.tex` file defining the slides itself and a `justfile` to compile it. The later prepends to the environment variable `TEXINPUTS`  the path of our custom tbeamer theme, which is set via the variable:
+The example directory provides a sample presentation using the custom theme. The directoy contains two files: the  `.tex` file defining the slides itself and a `justfile` to compile it. The later prepends sets two environment variables:
+
+ - `TEXINPUTS` with the path of our custom beamer theme, which is set via the variable:
+ - `OSFONTDIR` with the path of the fonts used by the theme.
 
 ```make
 
 THEME_DIR := $(realpath "../aneotheme")
+FONTS_DIR := THEME_DIR + "/fonts"
 
 ```
 
