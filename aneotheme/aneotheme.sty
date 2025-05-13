@@ -6,20 +6,48 @@
 
 \usepackage{fontspec}
 
-% Set main font as Lexend Deca as in the charte
-% graphique from 2024
-\setsansfont{Lexend Deca Light}
+\newfontfamily{\poppinsfont}{Poppins}[
+    Extension = .ttf,
+    UprightFont = *-Light,
+    BoldFont = *-SemiBold,
+    ItalicFont = *-LightItalic,
+    BoldItalicFont = *-SemiBoldItalic
+]
+
+\newfontfamily{\poppinsboldfont}{Poppins}[
+    Extension = .ttf,
+    UprightFont = *-Bold,
+    BoldFont = *-Black,
+    ItalicFont = *-BoldItalic,
+    BoldItalicFont = *-BlackItalic
+]
+
+\setmainfont{Poppins}[
+    Extension = .ttf,
+    UprightFont = *-Light,
+    BoldFont = *-SemiBold,
+    ItalicFont = *-LightItalic,
+    BoldItalicFont = *-SemiBoldItalic
+]
+
+%\setmainfont{LexendDeca}[
+%    Extension = .ttf,
+%    UprightFont = *-Light,
+%    BoldFont = *-SemiBold,
+%    ItalicFont = *-LightItalic,
+%    BoldItalicFont = *-SemiBoldItalic
+%]
 
 % Set titles and subtitles in Poppins Semibold as
 % in the charte graphique from 2024
-\newfontface\poppinssemibold{Poppins SemiBold}
-\setbeamerfont{frametitle}{family=\poppinssemibold}
-\setbeamerfont{title}{family=\poppinssemibold}
-\setbeamerfont{section title}{family=\poppinssemibold}
-\setbeamerfont{subtitle}{family=\poppinssemibold}
+\setbeamerfont{frametitle}{family=\poppinsboldfont}
+\setbeamerfont{title}{family=\poppinsboldfont}
+\setbeamerfont{section title}{family=\poppinsboldfont}
+\setbeamerfont{subtitle}{family=\poppinsboldfont}
+
 
 \AtBeginDocument{
-  \institute{{\poppinssemibold ANEO}}
+  \institute{{\poppinsboldfont ANEO}}
 }
 
 % Define primary colors
@@ -48,15 +76,15 @@
 \setbeamercolor{background canvas}{bg=aneogray}
 
 % Block colors
-\setbeamerfont{block title}{family=\poppinssemibold}
+\setbeamerfont{block title}{family=\poppinsboldfont}
 \setbeamercolor{block title}{bg=aneoturquoise,fg=aneoblack}
 \setbeamercolor{block body}{bg=aneoturquoise!20,fg=aneoblack}
 
-\setbeamerfont{block title alerted}{family=\poppinssemibold}
+\setbeamerfont{block title alerted}{family=\poppinsboldfont}
 \setbeamercolor{block title alerted}{bg=aneoorange,fg=aneoblack}
 \setbeamercolor{block body alerted}{bg=aneoorange!20,fg=aneoblack}
 
-\setbeamerfont{block title example}{family=\poppinssemibold}
+\setbeamerfont{block title example}{family=\poppinsboldfont}
 \setbeamercolor{block title example}{bg=aneoblue,fg=white}
 \setbeamercolor{block body example}{bg=aneoblue!20,fg=aneoblack}
 
